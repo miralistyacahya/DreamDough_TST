@@ -18,6 +18,7 @@ export default function CardProduk() {
                     template_img: record[2],
                     created_at: record[3],
                     updated_at: record[4],
+                    cake_image: record[5],
                   }));
                 setCakes(cakesData);
                 // setCakes(cakeRecord.data);
@@ -47,7 +48,7 @@ const handleCardClick = (cakeId: string) => {
             width="100%"
             alt={item.cake_name}
             className="w-full object-cover h-[140px]"
-            src={item.template_img}
+            src={item.cake_image}
           />
         </CardBody>
         <CardFooter className="text-small justify-between">

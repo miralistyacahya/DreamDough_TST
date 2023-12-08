@@ -8,6 +8,7 @@ export interface NavItem {
   }
 
 export const NAV_ADMIN:NavItem[] = [
+    { href: '/aboutA', key: 'aboutA', label: 'About'},
     { href: '/cakesA', key: 'produkA', label: 'Products'},
     { href: '/customersA', key: 'customerA', label: 'Customers'},
     { href: '/ordersA', key: 'orderA', label: 'Orders'},

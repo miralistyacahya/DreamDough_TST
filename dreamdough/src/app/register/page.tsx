@@ -9,34 +9,35 @@ import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Button } from '@nextui-org/button'
 import Link from 'next/link';
-import { loginUser } from '@/api/auth';
-import Cookies from "js-cookie";
+import { registerUser } from '@/api/auth';
 import { toastError, toastSuccess } from '@/components/toast';
 
-const login = () => {
+const register = () => {
     const path = usePathname();
     const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [username, setUsername] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         const data = {
             username: username,
+            name: name,
+            email: email,
             password: password,
         }
         try {
-            const loginRecord: any = await loginUser(data);
+            const registerRecord: any = await registerUser(data);
 
-            const token = loginRecord;
-            Cookies.set("token", token, { expires: 15 });
-            toastSuccess("Login Successful!");
-            router.push("/cakesA");
+            toastSuccess("Register Successful!");
+            router.push("/login");
         } catch(error){
-            toastError("Login Failed!");
+            toastError("Register Failed!");
         }
     }
 
@@ -48,7 +49,7 @@ const login = () => {
                 <CardBody>
                 <h1 className="heading bold-52 mt-8 text-purple-600 text-center">Welcome!</h1>
                     <div>
-                        <form className='mx-10' onSubmit={handleLogin}>
+                        <form className='mx-10' onSubmit={handleRegister}>
                             <div className='mt-16 mb-6'>
                                 <Input
                                     autoFocus
@@ -61,6 +62,32 @@ const login = () => {
                                     isRequired
                                     required
                                     onChange={(e) => setUsername(e.target.value)}
+                                    className='py-3 semibold-24'
+                                />
+                                <Input
+                                    autoFocus
+                                    label="name"
+                                    color="secondary"
+                                    key={"name"}
+                                    labelPlacement="outside"
+                                    placeholder="Enter your name"
+                                    variant="bordered"
+                                    isRequired
+                                    required
+                                    onChange={(e) => setName(e.target.value)}
+                                    className='py-3 semibold-24'
+                                />
+                                <Input
+                                    autoFocus
+                                    label="Email"
+                                    color="secondary"
+                                    key={"email"}
+                                    labelPlacement="outside"
+                                    placeholder="Enter your email"
+                                    variant="bordered"
+                                    isRequired
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className='py-3 semibold-24'
                                 />
                                 <Input
@@ -88,11 +115,11 @@ const login = () => {
                             </div>
                             <div className='flex flex-col justify-center items-center w-full mb-8 gap-2'>
                                 <Button color="secondary" type="submit" className='w-3/4 bg-purple-600 semibold-16'>
-                                    Login
+                                    Sign Up
                                 </Button>
-                                <p className='medium-16'>Don't Have Account?
-                                    <Link href={"/register"} className='semibold-16 text-purple-500'>
-                                        Create New
+                                <p className='medium-16'>Already Have Account?
+                                    <Link href={"/login"} className='semibold-16 text-purple-500'>
+                                        Login
                                     </Link>
                                 </p>
                             </div>
@@ -105,4 +132,4 @@ const login = () => {
   )
 }
 
-export default login;
+export default register;

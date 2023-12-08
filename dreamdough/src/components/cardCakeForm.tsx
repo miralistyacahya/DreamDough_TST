@@ -7,7 +7,7 @@ import OrderModal from "./orderModal";
 
 export default function CardCakeForm() {
     const [cakes, setCakes] = useState<Cakes>();
-    const [cake_id, setCakeId] = useState<string>('');
+    const [cake_id, setCakeId] = useState<number>();
     const [imageSrc, setImageSrc] = useState('');
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -17,9 +17,9 @@ export default function CardCakeForm() {
             try {
                 // console.log(path)
                 const cake_id = searchParams.get("cake_id")
-                // console.log(cake_id)
+                console.log(cake_id)
                 if(cake_id){
-                    setCakeId(cake_id);
+                    setCakeId(parseInt(cake_id));
                     const cakeRecord: any = await getCake(cake_id);
                     // console.log("ini cake record", cakeRecord)
                     const cakesData: Cakes = {
@@ -28,8 +28,9 @@ export default function CardCakeForm() {
                     template_img: cakeRecord[2],
                     created_at: cakeRecord[3],
                     updated_at: cakeRecord[4],
+                    cake_image: cakeRecord[5],
                   };
-                    // console.log("tes data", cakesData);
+                    console.log("tes data", cakesData);
                     setCakes(cakesData);
                 }
                 
@@ -86,7 +87,7 @@ export default function CardCakeForm() {
                     <Image
                     alt="Card background"
                     className="object-cover rounded-xl w-96 h-96"
-                    src={cakes.template_img}
+                    src={cakes.cake_image}
                     />
                 </div> 
             </CardBody>

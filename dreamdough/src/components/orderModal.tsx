@@ -9,7 +9,7 @@ import { createOrder } from "@/api/orders";
 import { toastSuccess } from "./toast";
 
 interface OrderModalProps {
-    cake_id: string;
+    cake_id: number | undefined;
   }
   
 const OrderModal: React.FC<OrderModalProps> = ({ cake_id }) => {
@@ -19,7 +19,6 @@ const OrderModal: React.FC<OrderModalProps> = ({ cake_id }) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [customer_name, setCustomerName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [order_date, setOrderDate] = useState<string>("");
   const [pickup_date, setPickupDate] = useState<string>("");
   const [order_status, setOrderStatus] = useState<string>("");
   const [addr, setAddress] = useState<string>("");
@@ -66,7 +65,7 @@ const OrderModal: React.FC<OrderModalProps> = ({ cake_id }) => {
         e.preventDefault();
         const currentDate = new Date();
         const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-        setOrderDate(formattedDate);
+        // setOrderDate(formattedDate);
         // console.log("cust_id", customerId);
         // console.log("cake_id", cake_id);
         // console.log("ord_date", order_date);
@@ -77,7 +76,7 @@ const OrderModal: React.FC<OrderModalProps> = ({ cake_id }) => {
           const createOrderRecord: any = await createOrder({
             "customer_id": customerId,
             "cake_id": cake_id,
-            "order_date": order_date,
+            "order_date": formattedDate,
             "pickup_date": pickup_date,
             "order_status": order_status,
             "addr": addr,
@@ -158,7 +157,7 @@ const OrderModal: React.FC<OrderModalProps> = ({ cake_id }) => {
                   label="Pickup Date"
                   color="secondary"
                   labelPlacement="outside"
-                  description='Fill this with the pickup date with the pattern "2023/06/15"'
+                  description='Fill this with the pickup date with the pattern "2023-06-15"'
                   placeholder="Enter your pickup date"
                   variant="bordered"
                   isRequired

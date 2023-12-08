@@ -32,7 +32,7 @@ const [cakes, setCakes] = useState<CakeRecommendation[]>([]);
   return (
     <div className="gap-12 flex justify-center items-center">
       {Array.isArray(cakes) && cakes.map((item, index) => (
-        <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")} className="w-7/12 h-64">
+        <Card shadow="sm" key={index} className="w-7/12 h-64">
           <CardBody className="overflow-visible p-0">
             <Image
               shadow="sm"
@@ -44,10 +44,10 @@ const [cakes, setCakes] = useState<CakeRecommendation[]>([]);
               src={item.cake_img}
             />
           </CardBody>
-          <CardFooter className="text-small justify-between">
+          <CardFooter className="text-large justify-center">
             <b>{item.cake_name}</b>
             {/* <p className="text-default-500">{item.price}</p> */}
-            <IoIosAddCircle size="30" color="#5A5894"/>
+            {/* <IoIosAddCircle size="30" color="#5A5894"/> */}
           </CardFooter>
         </Card>
       ))}

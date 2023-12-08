@@ -21,7 +21,7 @@ export default function RootLayout({
 			<head />
 			<body className='flex flex-col min-h-screen'>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-						<main className="relative overflow-hidden flex-1 flex-grow" style={{ background: 'linear-gradient(to right, rgba(156, 39, 176, 0.2), rgba(33, 150, 243, 0.1))'}}>
+						<main className="relative overflow-hidden flex-1 min-h-screen" style={{ background: 'linear-gradient(to right, rgba(156, 39, 176, 0.2), rgba(33, 150, 243, 0.1))'}}>
 							<ToastContainer />
 							{children}
 						</main>

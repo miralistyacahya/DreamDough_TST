@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseUrl = "https://18221116tubestst-production.up.railway.app/customer"
-const baseUrl = "http://127.0.0.1:8080/customer"
+const baseUrl = "https://18221116tubestst-production.up.railway.app/customer"
+// const baseUrl = "http://127.0.0.1:8080/customer"
 
 export const createNewCustomer = async (json: any) => {
     try {
@@ -16,6 +16,7 @@ export const createNewCustomer = async (json: any) => {
     } catch (error) {
         console.log("error1");
         console.error('Error createNewCustomer:', error);
+        throw new Error ("Error createNewCustomer");
     }
 }
 
